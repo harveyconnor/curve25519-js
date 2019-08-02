@@ -25,6 +25,7 @@
     "ed25519"
   ],
   "devDependencies": {
+    "@types/node": "^12.6.9",
     "prettier": "^1.18.2",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
