@@ -2,6 +2,8 @@
 
 Curve25519 signatures with X25519 keys.
 
+![NPM Version](https://img.shields.io/npm/v/curve25519-js)
+![NPM Downloads](https://img.shields.io/npm/dm/curve25519-js)
 
 ## Installation
 
