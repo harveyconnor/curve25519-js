@@ -1783,7 +1783,7 @@ function curve25519_sign_open(m: any, sm: any, n: any, pk: any) {
 
 /* High-level API */
 
-function checkArrayTypes(...args: any[]) {
+function checkArrayTypes(...args: any) {
   var t, i;
   for (i = 0; i < arguments.length; i++) {
     if ((t = Object.prototype.toString.call(arguments[i])) !== '[object Uint8Array]')
@@ -1908,7 +1908,7 @@ export function verify(publicKey: any, msg: any, signature: any) {
  * The returned keys can be used for signing and key agreement.
  *
  * @export
- * @param {Uint8Array} seed
+ * @param {Uint8Array} seed required
  * @returns
  */
 export function generateKeyPair(seed: any) {
