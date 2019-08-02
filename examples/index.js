@@ -11,7 +11,7 @@ const bobPub = Uint8Array.from(Buffer.from(BOB_PUB, 'hex'));
 
 const secret = sharedKey(alicePriv, bobPub);
 
-const keyPair = generateKeyPair(Uint8Array.from(crypto.randomBytes(32)));
+const keyPair = generateKeyPair(crypto.randomBytes(32));
 const privKey = Buffer.from(keyPair.private).toString('hex');
 const pubKey = Buffer.from(keyPair.public).toString('hex')
 
