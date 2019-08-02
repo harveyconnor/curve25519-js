@@ -1,5 +1,5 @@
 {
-  "name": "curve25519",
+  "name": "curve25519-js",
   "version": "0.0.1",
   "description": "Javascript implementation of Curve25519",
   "main": "lib/index.js",
