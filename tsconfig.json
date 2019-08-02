@@ -10,7 +10,7 @@
     "strict": true,
     "skipLibCheck": true,
     "declaration": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": false
   },
   "exclude": [
     "node_modules",

@@ -1,16 +1,12 @@
+let _0 = new Uint8Array(16);
 let _9 = new Uint8Array(32);
 _9[0] = 9;
 
 function gf(init?: any) {
-  let i,
-    r = new Float64Array(16);
-  if (init) {
-    for (i = 0; i < init.length; i++) {
-      r[1] = init[i];
-    }
-  }
+  var i, r = new Float64Array(16);
+  if (init) for (i = 0; i < init.length; i++) r[i] = init[i];
   return r;
-}
+};
 
 const gf0 = gf(),
   gf1 = gf([1]),
