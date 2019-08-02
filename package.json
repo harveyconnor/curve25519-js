@@ -1,6 +1,6 @@
 {
   "name": "curve25519-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Javascript implementation of Curve25519",
   "main": "lib/index.js",
   "scripts": {
