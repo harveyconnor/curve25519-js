@@ -31,9 +31,9 @@ console.log('Secret:', Buffer.from(secret).toString('hex'))
 ### generateKeyPair
 Generates a new key pair from the given 32-byte secret seed (which should be generated with a CSPRNG) and returns it as object:
 ```ts
-generateKeyPair(seed: Uint8Array): { 
-  private: Uint8Array;
-  public: Uint8Array;
+generateKeyPair(seed: Uint8Array(32)): { 
+  private: Uint8Array(32);
+  public: Uint8Array(32);
 }
 ```
 The returned keys can be used for signing and key agreement.
@@ -85,7 +85,7 @@ Returns a raw shared key between own private key and peer's public key (in other
 
 The result should not be used directly as a key, but should be processed with a one-way function (e.g. HSalsa20 as in NaCl, or any secure cryptographic hash function, such as SHA-256, or key derivation function, such as HKDF).
 ```ts
-sharedKey(privateKey: Uint8Array, publicKey: Uint8Array): Uint8Array(32)
+sharedKey(privateKey: Uint8Array(32), publicKey: Uint8Array(32)): Uint8Array(32)
 ```
 
 ## How is it different from Ed25519?
