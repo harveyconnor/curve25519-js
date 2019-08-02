@@ -2,16 +2,11 @@ let _0 = new Uint8Array(16);
 let _9 = new Uint8Array(32);
 _9[0] = 9;
 
-function gf(init?: number[]) {
-  let i,
-    r = new Float64Array(16);
-  if (init) {
-    for (i = 0; i < init.length; i++) {
-      r[1] = init[i];
-    }
-  }
+function gf(init?: any) {
+  var i, r = new Float64Array(16);
+  if (init) for (i = 0; i < init.length; i++) r[i] = init[i];
   return r;
-}
+};
 
 const gf0 = gf(),
   gf1 = gf([1]),
@@ -107,7 +102,7 @@ const gf0 = gf(),
     0x2b83,
   ]);
 
-function ts64(x: Uint8Array, i: number, h: number, l: number) {
+function ts64(x: any, i: any, h: any, l: any) {
   x[i] = (h >> 24) & 0xff;
   x[i + 1] = (h >> 16) & 0xff;
   x[i + 2] = (h >> 8) & 0xff;
@@ -118,23 +113,23 @@ function ts64(x: Uint8Array, i: number, h: number, l: number) {
   x[i + 7] = l & 0xff;
 }
 
-function vn(x: Uint8Array, xi: number, y: Uint8Array, yi: number, n: number) {
+function vn(x: any, xi: any, y: any, yi: any, n: any) {
   var i,
     d = 0;
   for (i = 0; i < n; i++) d |= x[xi + i] ^ y[yi + i];
   return (1 & ((d - 1) >>> 8)) - 1;
 }
 
-function crypto_verify_32(x: Uint8Array, xi: number, y: Uint8Array, yi: number) {
+function crypto_verify_32(x: any, xi: any, y: any, yi: any) {
   return vn(x, xi, y, yi, 32);
 }
 
-function set25519(r: Float64Array, a: Float64Array) {
+function set25519(r: any, a: any) {
   var i;
   for (i = 0; i < 16; i++) r[i] = a[i] | 0;
 }
 
-function car25519(o: Float64Array) {
+function car25519(o: any) {
   var i,
     v,
     c = 1;
@@ -146,7 +141,7 @@ function car25519(o: Float64Array) {
   o[0] += c - 1 + 37 * (c - 1);
 }
 
-function sel25519(p: Float64Array, q: Float64Array, b: number) {
+function sel25519(p: any, q: any, b: any) {
   var t,
     c = ~(b - 1);
   for (var i = 0; i < 16; i++) {
@@ -156,7 +151,7 @@ function sel25519(p: Float64Array, q: Float64Array, b: number) {
   }
 }
 
-function pack25519(o: Uint8Array, n: Float64Array) {
+function pack25519(o: any, n: any) {
   var i, j, b;
   var m = gf(),
     t = gf();
@@ -181,7 +176,7 @@ function pack25519(o: Uint8Array, n: Float64Array) {
   }
 }
 
-function neq25519(a: Float64Array, b: Float64Array) {
+function neq25519(a: any, b: any) {
   var c = new Uint8Array(32),
     d = new Uint8Array(32);
   pack25519(c, a);
@@ -189,27 +184,27 @@ function neq25519(a: Float64Array, b: Float64Array) {
   return crypto_verify_32(c, 0, d, 0);
 }
 
-function par25519(a: Float64Array) {
+function par25519(a: any) {
   var d = new Uint8Array(32);
   pack25519(d, a);
   return d[0] & 1;
 }
 
-function unpack25519(o: Float64Array, n: Uint8Array) {
+function unpack25519(o: any, n: any) {
   var i;
   for (i = 0; i < 16; i++) o[i] = n[2 * i] + (n[2 * i + 1] << 8);
   o[15] &= 0x7fff;
 }
 
-function A(o: Float64Array, a: Float64Array, b: Float64Array) {
+function A(o: any, a: any, b: any) {
   for (var i = 0; i < 16; i++) o[i] = a[i] + b[i];
 }
 
-function Z(o: Float64Array, a: Float64Array, b: Float64Array) {
+function Z(o: any, a: any, b: any) {
   for (var i = 0; i < 16; i++) o[i] = a[i] - b[i];
 }
 
-function M(o: Float64Array, a: Float64Array, b: Float64Array) {
+function M(o: any, a: any, b: any) {
   var v,
     c,
     t0 = 0,
@@ -672,11 +667,11 @@ function M(o: Float64Array, a: Float64Array, b: Float64Array) {
   o[15] = t15;
 }
 
-function S(o: Float64Array, a: Float64Array) {
+function S(o: any, a: any) {
   M(o, a, a);
 }
 
-function inv25519(o: Float64Array, i: Float64Array) {
+function inv25519(o: any, i: any) {
   var c = gf();
   var a;
   for (a = 0; a < 16; a++) c[a] = i[a];
@@ -687,7 +682,7 @@ function inv25519(o: Float64Array, i: Float64Array) {
   for (a = 0; a < 16; a++) o[a] = c[a];
 }
 
-function pow2523(o: Float64Array, i: Float64Array) {
+function pow2523(o: any, i: any) {
   var c = gf();
   var a;
   for (a = 0; a < 16; a++) c[a] = i[a];
@@ -698,7 +693,7 @@ function pow2523(o: Float64Array, i: Float64Array) {
   for (a = 0; a < 16; a++) o[a] = c[a];
 }
 
-function crypto_scalarmult(q: Uint8Array, n: Uint8Array, p: Uint8Array) {
+function crypto_scalarmult(q: any, n: any, p: any) {
   var z = new Uint8Array(32);
   var x = new Float64Array(80),
     r,
@@ -757,7 +752,7 @@ function crypto_scalarmult(q: Uint8Array, n: Uint8Array, p: Uint8Array) {
   return 0;
 }
 
-function crypto_scalarmult_base(q: Uint8Array, n: Uint8Array) {
+function crypto_scalarmult_base(q: any, n: any) {
   return crypto_scalarmult(q, n, _9);
 }
 
@@ -924,7 +919,7 @@ var K = [
   0x4a475817,
 ];
 
-function crypto_hashblocks_hl(hh: Int32Array, hl: Int32Array, m: Uint8Array, n: number) {
+function crypto_hashblocks_hl(hh: Int32Array, hl: Int32Array, m: any, n: any) {
   var wh = new Int32Array(16),
     wl = new Int32Array(16),
     bh0,
@@ -1383,7 +1378,7 @@ function crypto_hashblocks_hl(hh: Int32Array, hl: Int32Array, m: Uint8Array, n: 
   return n;
 }
 
-function crypto_hash(out: Uint8Array, m: Uint8Array, n: number) {
+function crypto_hash(out: any, m: any, n: any) {
   var hh = new Int32Array(8),
     hl = new Int32Array(8),
     x = new Uint8Array(256),
@@ -1533,7 +1528,7 @@ var L = new Float64Array([
   0x10,
 ]);
 
-function modL(r: Uint8Array, x: Float64Array) {
+function modL(r: any, x: any) {
   var carry, i, j, k;
   for (i = 63; i >= 32; --i) {
     carry = 0;
@@ -1558,7 +1553,7 @@ function modL(r: Uint8Array, x: Float64Array) {
   }
 }
 
-function reduce(r: Uint8Array) {
+function reduce(r: any) {
   var x = new Float64Array(64),
     i;
   for (i = 0; i < 64; i++) x[i] = r[i];
@@ -1567,7 +1562,7 @@ function reduce(r: Uint8Array) {
 }
 
 // Like crypto_sign, but uses secret key directly in hash.
-function crypto_sign_direct(sm: Uint8Array, m: Float64Array, n: number, sk: any) {
+function crypto_sign_direct(sm: any, m: any, n: any, sk: any) {
   var h = new Uint8Array(64),
     r = new Uint8Array(64);
   var i,
@@ -1600,7 +1595,7 @@ function crypto_sign_direct(sm: Uint8Array, m: Float64Array, n: number, sk: any)
 }
 
 // Note: sm must be n+128.
-function crypto_sign_direct_rnd(sm: Uint8Array, m: Float64Array, n: number, sk: Uint8Array, rnd: Uint8Array) {
+function crypto_sign_direct_rnd(sm: any, m: any, n: any, sk: any, rnd: any) {
   var h = new Uint8Array(64),
     r = new Uint8Array(64);
   var i,
@@ -1646,7 +1641,7 @@ function crypto_sign_direct_rnd(sm: Uint8Array, m: Float64Array, n: number, sk: 
   return n + 64;
 }
 
-function curve25519_sign(sm: Uint8Array, m: Float64Array, n: number, sk: Uint8Array, opt_rnd?: any) {
+function curve25519_sign(sm: any, m: any, n: any, sk: any, opt_rnd?: any) {
   // If opt_rnd is provided, sm must have n + 128,
   // otherwise it must have n + 64 bytes.
 
@@ -1678,7 +1673,7 @@ function curve25519_sign(sm: Uint8Array, m: Float64Array, n: number, sk: Uint8Ar
   return smlen;
 }
 
-function unpackneg(r: any, p: Uint8Array) {
+function unpackneg(r: any, p: any) {
   var t = gf(),
     chk = gf(),
     num = gf(),
@@ -1720,7 +1715,7 @@ function unpackneg(r: any, p: Uint8Array) {
   return 0;
 }
 
-function crypto_sign_open(m: Uint8Array, sm: Uint8Array, n: number, pk: Uint8Array) {
+function crypto_sign_open(m: any, sm: any, n: any, pk: any) {
   var i, mlen;
   var t = new Uint8Array(32),
     h = new Uint8Array(64);
@@ -1755,7 +1750,7 @@ function crypto_sign_open(m: Uint8Array, sm: Uint8Array, n: number, pk: Uint8Arr
 
 // Converts Curve25519 public key back to Ed25519 public key.
 // edwardsY = (montgomeryX - 1) / (montgomeryX + 1)
-function convertPublicKey(pk: Uint8Array) {
+function convertPublicKey(pk: any) {
   var z = new Uint8Array(32),
     x = gf(),
     a = gf(),
@@ -1772,7 +1767,7 @@ function convertPublicKey(pk: Uint8Array) {
   return z;
 }
 
-function curve25519_sign_open(m: Uint8Array, sm: Uint8Array, n: number, pk: Uint8Array) {
+function curve25519_sign_open(m: any, sm: any, n: any, pk: any) {
   // Convert Curve25519 public key into Ed25519 public key.
   var edpk = convertPublicKey(pk);
 
@@ -1788,7 +1783,7 @@ function curve25519_sign_open(m: Uint8Array, sm: Uint8Array, n: number, pk: Uint
 
 /* High-level API */
 
-function checkArrayTypes(...args: Uint8Array[]) {
+function checkArrayTypes(...args: any[]) {
   var t, i;
   for (i = 0; i < arguments.length; i++) {
     if ((t = Object.prototype.toString.call(arguments[i])) !== '[object Uint8Array]')
@@ -1806,7 +1801,7 @@ function checkArrayTypes(...args: Uint8Array[]) {
  * @param {Uint8Array} publicKey
  * @returns Uint8Array
  */
-export function sharedKey(secretKey: Uint8Array, publicKey: Uint8Array) {
+export function sharedKey(secretKey: any, publicKey: any) {
   checkArrayTypes(publicKey, secretKey);
   if (publicKey.length !== 32) throw new Error('wrong public key length');
   if (secretKey.length !== 32) throw new Error('wrong secret key length');
@@ -1826,7 +1821,7 @@ export function sharedKey(secretKey: Uint8Array, publicKey: Uint8Array) {
  * @param {Uint8Array} opt_random
  * @returns
  */
-export function signMessage(secretKey: Uint8Array, msg: any, opt_random: Uint8Array) {
+export function signMessage(secretKey: any, msg: any, opt_random: any) {
   checkArrayTypes(msg, secretKey);
   if (secretKey.length !== 32) throw new Error('wrong secret key length');
   if (opt_random) {
@@ -1850,7 +1845,7 @@ export function signMessage(secretKey: Uint8Array, msg: any, opt_random: Uint8Ar
  * @param {*} signedMsg
  * @returns Message
  */
-export function openMessage(publicKey: Uint8Array, signedMsg: any) {
+export function openMessage(publicKey: any, signedMsg: any) {
   checkArrayTypes(signedMsg, publicKey);
   if (publicKey.length !== 32) throw new Error('wrong public key length');
   var tmp = new Uint8Array(signedMsg.length);
@@ -1872,7 +1867,7 @@ export function openMessage(publicKey: Uint8Array, signedMsg: any) {
  * @param {Uint8Array} opt_random
  * @returns
  */
-export function sign(secretKey: Uint8Array, msg: any, opt_random: Uint8Array) {
+export function sign(secretKey: any, msg: any, opt_random: any) {
   checkArrayTypes(secretKey, msg);
   if (secretKey.length !== 32) throw new Error('wrong secret key length');
   if (opt_random) {
@@ -1895,7 +1890,7 @@ export function sign(secretKey: Uint8Array, msg: any, opt_random: Uint8Array) {
  * @param {*} signature
  * @returns
  */
-export function verify(publicKey: Uint8Array, msg: any, signature: any) {
+export function verify(publicKey: any, msg: any, signature: any) {
   checkArrayTypes(msg, signature, publicKey);
   if (signature.length !== 64) throw new Error('wrong signature length');
   if (publicKey.length !== 32) throw new Error('wrong public key length');
@@ -1916,7 +1911,7 @@ export function verify(publicKey: Uint8Array, msg: any, signature: any) {
  * @param {Uint8Array} seed
  * @returns
  */
-export function generateKeyPair(seed: Uint8Array) {
+export function generateKeyPair(seed: any) {
   checkArrayTypes(seed);
   if (seed.length !== 32) throw new Error('wrong seed length');
   var sk = new Uint8Array(32);
